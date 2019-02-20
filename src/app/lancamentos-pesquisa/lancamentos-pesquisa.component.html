@@ -25,11 +25,11 @@
       <p-table [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
           <ng-template pTemplate="header">
               <tr>
-                  <th class="col-data">Pessoa</th>
-                  <th class="col-data">Descrição</th>
+                  <th>Pessoa</th>
+                  <th>Descrição</th>
                   <th class="col-data">Vencimento</th>
                   <th class="col-data">Pagamento</th>
-                  <th class="col-data">Valor</th>
+                  <th class="col-valor">Valor</th>
                   <th class="col-acoes"></th>
               </tr>
           </ng-template>
@@ -39,7 +39,7 @@
                   <td>{{lanc.descricao}}</td>
                   <td>{{lanc.dataVencimento}}</td>
                   <td>{{lanc.dataPagamento}}</td>
-                  <td><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor}}</span></td>
+                  <td style="text-align: right"><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor}}</span></td>
                   <td>
                       <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
                       <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="btn-acoes"></button>
