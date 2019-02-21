@@ -37,9 +37,9 @@
               <tr>
                   <td>{{lanc.pessoa}}</td>
                   <td>{{lanc.descricao}}</td>
-                  <td>{{lanc.dataVencimento}}</td>
-                  <td>{{lanc.dataPagamento}}</td>
-                  <td style="text-align: right"><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor}}</span></td>
+                  <td>{{lanc.dataVencimento | date: 'dd/MM/y'}}</td>
+                  <td>{{lanc.dataPagamento | date: 'dd/MM/y'}}</td>
+                  <td style="text-align: right"><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor | currency:'BRL':'symbol'}}</span></td>
                   <td>
                       <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
                       <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="btn-acoes"></button>
