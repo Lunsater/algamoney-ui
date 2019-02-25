@@ -9,6 +9,7 @@ const routes: Routes = [];
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+
   routes: Routes = [
     {path: 'pessoas', component: PessoasPesquisaComponent}
   ];
