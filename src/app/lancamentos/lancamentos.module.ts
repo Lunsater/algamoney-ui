@@ -10,6 +10,9 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { TableModule } from 'primeng/components/table/table';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { SharedModule } from '../shared/shared.module';
+import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
     InputTextModule,
     CurrencyMaskModule,
     DropdownModule,
-    TableModule
+    TableModule,
+    TooltipModule,
+    InputTextareaModule,
+    SharedModule
   ],
   exports: [
     LancamentoCadastroComponent,
