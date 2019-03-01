@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,12 @@ export class LancamentoService {
 
   constructor(private http: HttpClient) { }
 
-  pesquisar(): Promise<any> {
+  pesquisar(): Observable<any> {
     const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
 
-    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers })
-      .toPromise()
-      .then(response => {
-        console.log(response.toString);
-      });
+    return this.http.get(`${this.lancamentosUrl}?resumo`, { headers });
   }
 
 }
