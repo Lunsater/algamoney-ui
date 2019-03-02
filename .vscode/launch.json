@@ -4,15 +4,12 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Algamoney 1.0",
-            "program": "${workspaceFolder}\\index.html",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/dist/out-tsc/**/*.js"
-            ]
-        }
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Algamoney 1.0",
+        "url": "http://localhost:4200",
+        "webRoot": "${workspaceFolder}"
+      }
     ]
 }

@@ -13,8 +13,8 @@ export class LancamentosPesquisaComponent implements OnInit {
   constructor(private lancamentoService: LancamentoService) { }
 
   pesquisar() {
-    this.lancamentoService.pesquisar().subscribe(data => {
-      console.log(data);
+    this.lancamentoService.pesquisar().subscribe((data: any[]) => {
+      this.lancamentos = data['content'];
     });
   }
 

@@ -12,9 +12,11 @@ export class LancamentoService {
   constructor(private http: HttpClient) { }
 
   pesquisar(): Observable<any> {
+    /*
     const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
+    */
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers });
   }
