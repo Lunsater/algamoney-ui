@@ -9,7 +9,7 @@ import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
 })
 export class LancamentosPesquisaComponent implements OnInit {
 
-  totalRegistros = 100;
+  totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PessoaFiltro, PessoaService } from '../pessoa.service';
+import { LazyLoadEvent } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -7,19 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PessoasPesquisaComponent implements OnInit {
 
-  pessoas = [
-    {nome: 'Daenerys Targaryen', cidade: 'Essos', estado: 'GT', ativo: true},
-    {nome: 'Jon Snow', cidade: 'Winterfell', estado: 'GT', ativo: true},
-    {nome: 'Sansa Stark', cidade: 'Winterfell', estado: 'GT', ativo: true},
-    {nome: 'Oberyn Martell', cidade: 'Dorne', estado: 'GT', ativo: false},
-    {nome: 'Jaime Lannister', cidade: 'Kings Landing', estado: 'GT', ativo: true},
-    {nome: 'Khal Drogo', cidade: 'Dothraki', estado: 'GT', ativo: false},
-    {nome: 'Cersei Baratheon', cidade: 'Kings Landing', estado: 'GT', ativo: false}
-  ];
+  totalRegistros = 0;
+  filtro = new PessoaFiltro();
+  pessoas = [];
 
-  constructor() { }
+  constructor(private pessoaService: PessoaService) { }
 
   ngOnInit() {
+  }
+
+  pesquisar(pagina = 0) {
+    this.filtro.pagina = pagina;
+
+    this.pessoaService.pesquisar(this.filtro)
+      .subscribe((data: any[]) => {
+        this.pessoas = data['content'];
+        this.totalRegistros = data['totalElements'];
+      });
+  }
+
+  aoMudarPagina(event: LazyLoadEvent) {
+    const pagina = event.first / event.rows;
+    this.pesquisar(pagina);
   }
 
 }
