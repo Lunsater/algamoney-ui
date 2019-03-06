@@ -43,4 +43,10 @@ export class LancamentoService {
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params });
   }
 
+  excluir(codigo: number): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
+
+    return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers });
+  }
+
 }

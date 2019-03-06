@@ -31,7 +31,7 @@
     <div class="ui-g-12">
         <p-table [value]="lancamentos" [paginator]="true" [responsive]="true"
         [rows]="filtro.itensPorPagina" [totalRecords]="totalRegistros" [lazy]="true"
-        (onLazyLoad)="aoMudarPagina($event)" emptyMessage="Nenhum lançamento encontrado">
+        (onLazyLoad)="aoMudarPagina($event)" emptyMessage="Nenhum lançamento encontrado" #tabela>
         <ng-template pTemplate="header">
             <tr>
                 <th>Pessoa</th>
@@ -50,8 +50,11 @@
                 <td>{{lanc.dataPagamento | date: 'dd/MM/y'}}</td>
                 <td style="text-align: right"><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor | currency:'BRL':'symbol'}}</span></td>
                 <td>
+
                     <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
-                    <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="btn-acoes"></button>
+                    <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+                      class="btn-acoes" (click)="excluir(lanc)"></button>
+
                 </td>
             </tr>
         </ng-template>
