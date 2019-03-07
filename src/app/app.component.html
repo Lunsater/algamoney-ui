@@ -9,3 +9,13 @@
 <app-lancamentos-pesquisa></app-lancamentos-pesquisa>
 <app-pessoas-pesquisa></app-pessoas-pesquisa>
 -->
+
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-confirmDialog header="Confirmation" icon="fa fa-question-circle" #confirmacao>
+  <p-footer>
+    <button type="button" pButton icon="fa fa-check" label="Sim"
+      (click)="confirmacao.accept()"></button>
+    <button type="button" pButton icon="fa fa-times" label="Não"
+      (click)="confirmacao.reject()"></button>
+  </p-footer>
+</p-confirmDialog>

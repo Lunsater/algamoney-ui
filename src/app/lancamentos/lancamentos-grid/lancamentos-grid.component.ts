@@ -11,18 +11,22 @@ import { LancamentosPesquisaComponent } from '../lancamentos-pesquisa/lancamento
 export class LancamentosGridComponent implements OnInit {
 
   @Input() lancamentos: [];
+  /*
   @Input() filtro: LancamentoFiltro;
   @Input() totalRegistros: number;
   @Input() lancamentoService: LancamentoService;
   constructor() { }
+  */
 
   ngOnInit() {
   }
 
+  /*
   aoMudarPagina(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     const lancamentosPesquisaComponent = new LancamentosPesquisaComponent(this.lancamentoService);
     lancamentosPesquisaComponent.pesquisar(pagina);
   }
+  */
 
 }
