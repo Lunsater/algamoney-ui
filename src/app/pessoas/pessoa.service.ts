@@ -37,4 +37,18 @@ export class PessoaService {
     return this.http.get(`${this.pessoasUrl}`, { headers});
   }
 
+  excluir(codigo: number): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
+
+    return this.http.delete(`${this.pessoasUrl}/${codigo}`, { headers });
+  }
+
+  alternarStatus(codigo: number, ativo: boolean): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
+    headers = headers.append('Content-Type', 'application/json' );
+
+    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers });
+  }
+
 }

@@ -23,7 +23,7 @@
       <!--<app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid>-->
       <p-table [value]="pessoas" [paginator]="true" [responsive]="true"
         [rows]="filtro.itensPorPagina" [totalRecords]="totalRegistros" [lazy]="true"
-        (onLazyLoad)="aoMudarPagina($event)" emptyMessage="Nenhuma pessoa encontrada">
+        (onLazyLoad)="aoMudarPagina($event)" emptyMessage="Nenhuma pessoa encontrada" #tabela>
           <ng-template pTemplate="header">
               <tr>
                   <th>Nome</th>
@@ -38,10 +38,17 @@
                   <td>{{pes.nome}}</td>
                   <td>{{pes.endereco.cidade}}</td>
                   <td>{{pes.endereco.estado}}</td>
-                  <td>{{pes.ativo ? 'Ativo' : 'Inativo'}}</td>
+                  <td><a href="javascript:;"
+                          [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'"
+                          tooltipPosition="top"
+                          (click)="alternarStatus(pes)">
+                        {{ pes.ativo ? 'Ativo' : 'Inativo' }}
+                      </a>
+                  </td>
                   <td>
                       <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
-                      <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top" class="btn-acoes"></button>
+                      <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+                        class="btn-acoes" (click)="confirmarExclusao(pes)"></button>
                   </td>
               </tr>
           </ng-template>
