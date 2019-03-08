@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
+import { Lancamento } from '../core/model';
 
 export class LancamentoFiltro {
   descricao: string;
@@ -47,6 +48,14 @@ export class LancamentoService {
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
 
     return this.http.delete(`${this.lancamentosUrl}/${codigo}`, { headers });
+  }
+
+  adicionar(lancamento: Lancamento): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
+    headers = headers.append('Content-Type', 'application/json' );
+
+    return this.http.post(`${this.lancamentosUrl}`, JSON.stringify(lancamento), { headers });
   }
 
 }

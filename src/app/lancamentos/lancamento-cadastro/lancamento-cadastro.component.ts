@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/categorias/categoria.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 import { PessoaService } from 'src/app/pessoas/pessoa.service';
-import { map } from 'rxjs/operators';
+import { Lancamento } from 'src/app/core/model';
+import { FormControl } from '@angular/forms';
+import { LancamentoService } from '../lancamento.service';
+import { MessageService } from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -17,11 +20,13 @@ export class LancamentoCadastroComponent implements OnInit {
   ];
 
   categorias = [];
-
   pessoas = [];
+  lancamento = new Lancamento();
 
   constructor(private categoriaService: CategoriaService,
               private pessoaService: PessoaService,
+              private lancamentoService: LancamentoService,
+              private messageService: MessageService,
               private errorHandler: ErrorHandlerService) { }
 
   ngOnInit() {
@@ -29,22 +34,34 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
+  salvar(form: FormControl) {
+    this.lancamentoService.adicionar(this.lancamento)
+      .subscribe(() => {
+        this.messageService.add({severity: 'success', summary: 'Salvar',
+          detail: 'Lançamento adicionado com sucesso'});
+
+        form.reset();
+        this.lancamento = new Lancamento();
+      },
+      (erro) => {this.errorHandler.handle(erro); });
+  }
+
   carregarCategorias() {
     return this.categoriaService.listarTodas()
-    .subscribe((categoria: any[]) => {
-      console.log(typeof categoria, categoria);
-      this.categorias = categoria.map(c => ({ label: c.nome, value: c.codigo}));
-    },
-    (erro) => {this.errorHandler.handle(erro); });
+      .subscribe((categoria: any[]) => {
+        console.log(typeof categoria, categoria);
+        this.categorias = categoria.map(c => ({ label: c.nome, value: c.codigo}));
+      },
+      (erro) => {this.errorHandler.handle(erro); });
   }
 
   carregarPessoas() {
     return this.pessoaService.listarTodos()
-    .subscribe((pessoa: any[]) => {
-      console.log(typeof pessoa, pessoa);
-      this.pessoas = pessoa.content.map(p => ({ label: p.nome, value: p.codigo}));
-    },
-    (erro) => {this.errorHandler.handle(erro); });
+      .subscribe((pessoa: any[]) => {
+        console.log(typeof pessoa, pessoa);
+        this.pessoas = pessoa['content'].map(p => ({ label: p.nome, value: p.codigo}));
+      },
+      (erro) => {this.errorHandler.handle(erro); });
   }
 
 }
