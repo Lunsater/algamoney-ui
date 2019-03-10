@@ -6,6 +6,7 @@ import { Lancamento } from 'src/app/core/model';
 import { FormControl } from '@angular/forms';
 import { LancamentoService } from '../lancamento.service';
 import { MessageService } from 'primeng/components/common/api';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -27,11 +28,28 @@ export class LancamentoCadastroComponent implements OnInit {
               private pessoaService: PessoaService,
               private lancamentoService: LancamentoService,
               private messageService: MessageService,
-              private errorHandler: ErrorHandlerService) { }
+              private errorHandler: ErrorHandlerService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .subscribe((data: any[]) => {
+        lanc = data['content'];
+
+        this.lancamentoService.converterStringsParaDatas([lanc]);
+        this.lancamento = new Lancamento();
+      },
+      (erro) => {this.errorHandler.handle(erro); });
   }
 
   salvar(form: FormControl) {

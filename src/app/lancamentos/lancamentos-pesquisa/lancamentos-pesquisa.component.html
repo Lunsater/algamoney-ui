@@ -51,7 +51,8 @@
                 <td style="text-align: right"><span [style.color]="lanc.tipo == 'DESPESA' ? 'red' : 'blue'">{{lanc.valor | currency:'BRL':'symbol'}}</span></td>
                 <td>
 
-                    <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
+                    <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                      class="btn-acoes" [routerLink]="['/lancamentos', lanc.codigo]"></a>
                     <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
                       class="btn-acoes" (click)="confirmarExclusao(lanc)"></button>
 
@@ -63,7 +64,7 @@
   </div>
 
   <div class="ui-g-12">
-    <a pButton label="Novo Lançamento"></a>
+    <a pButton label="Novo Lançamento" routerLink="/lancamentos/novo"></a>
   </div>
 
 </div>

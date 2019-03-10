@@ -58,4 +58,29 @@ export class LancamentoService {
     return this.http.post(`${this.lancamentosUrl}`, JSON.stringify(lancamento), { headers });
   }
 
+  atualizar(lanc: Lancamento): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
+    headers = headers.append('Content-Type', 'application/json' );
+
+    return this.http.put(`${this.lancamentosUrl}/${lanc.codigo}`, JSON.stringify(lanc), { headers });
+  }
+
+  buscarPorCodigo(codigo: number): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
+
+    return this.http.get(`${this.lancamentosUrl}/${codigo}`, { headers });
+  }
+
+  converterStringsParaDatas(lancamentos: Lancamento[]) {
+    for (const lanc of lancamentos) {
+      lanc.dataVencimento = new  Date(lanc.dataVencimento);
+
+      if (lanc.dataPagamento) {
+        lanc.dataPagamento = new  Date(lanc.dataPagamento);
+      }
+    }
+
+
+  }
 }

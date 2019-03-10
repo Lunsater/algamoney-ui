@@ -7,6 +7,7 @@ import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdia
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { MessageService, ConfirmationService } from 'primeng/components/common/api';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MessageService, ConfirmationService } from 'primeng/components/common/a
   imports: [
     CommonModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

@@ -14,6 +14,7 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { SharedModule } from '../shared/shared.module';
 import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
 import { MessageService } from 'primeng/components/common/api';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MessageService } from 'primeng/components/common/api';
     TableModule,
     TooltipModule,
     InputTextareaModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
     LancamentoCadastroComponent,
