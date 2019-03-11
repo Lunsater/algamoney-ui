@@ -74,10 +74,10 @@ export class LancamentoService {
 
   converterStringsParaDatas(lancamentos: Lancamento[]) {
     for (const lanc of lancamentos) {
-      lanc.dataVencimento = new  Date(lanc.dataVencimento);
+      lanc.dataVencimento = new Date(lanc.dataVencimento);
 
       if (lanc.dataPagamento) {
-        lanc.dataPagamento = new  Date(lanc.dataPagamento);
+        lanc.dataPagamento = new Date(lanc.dataPagamento);
       }
     }
 

@@ -44,10 +44,11 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo)
       .subscribe((data: any[]) => {
-        lanc = data['content'];
+        console.log(data);
+        let lanc: Lancamento = data as unknown as Lancamento;
 
         this.lancamentoService.converterStringsParaDatas([lanc]);
-        this.lancamento = new Lancamento();
+        this.lancamento = lanc;
       },
       (erro) => {this.errorHandler.handle(erro); });
   }
@@ -67,7 +68,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarCategorias() {
     return this.categoriaService.listarTodas()
       .subscribe((categoria: any[]) => {
-        console.log(typeof categoria, categoria);
+        //console.log(typeof categoria, categoria);
         this.categorias = categoria.map(c => ({ label: c.nome, value: c.codigo}));
       },
       (erro) => {this.errorHandler.handle(erro); });
@@ -76,7 +77,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarPessoas() {
     return this.pessoaService.listarTodos()
       .subscribe((pessoa: any[]) => {
-        console.log(typeof pessoa, pessoa);
+        //console.log(typeof pessoa, pessoa);
         this.pessoas = pessoa['content'].map(p => ({ label: p.nome, value: p.codigo}));
       },
       (erro) => {this.errorHandler.handle(erro); });
