@@ -41,10 +41,33 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
+  salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .subscribe((dados: any[]) => {
+        console.log(dados);
+        //this.lancamento = dados as unknown as Lancamento;
+
+        this.messageService.add({severity: 'success', summary: 'Salvar',
+          detail: 'Lançamento alterado com sucesso'});
+      },
+      (erro) => {this.errorHandler.handle(erro); });
+  }
+
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo)
       .subscribe((data: any[]) => {
-        console.log(data);
         let lanc: Lancamento = data as unknown as Lancamento;
 
         this.lancamentoService.converterStringsParaDatas([lanc]);
@@ -53,7 +76,7 @@ export class LancamentoCadastroComponent implements OnInit {
       (erro) => {this.errorHandler.handle(erro); });
   }
 
-  salvar(form: FormControl) {
+  adicionarLancamento(form: FormControl) {
     this.lancamentoService.adicionar(this.lancamento)
       .subscribe(() => {
         this.messageService.add({severity: 'success', summary: 'Salvar',
