@@ -27,9 +27,6 @@ import { SharedModule } from '../shared/shared.module';
     TooltipModule,
     SharedModule
   ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoasPesquisaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }
