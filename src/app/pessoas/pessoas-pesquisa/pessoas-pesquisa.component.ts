@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PessoaFiltro, PessoaService } from '../pessoa.service';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/components/common/api';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Title } from '@angular/platform-browser';
+import { FormControl } from '@angular/forms';
+import { Pessoa } from 'src/app/core/model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -18,9 +22,13 @@ export class PessoasPesquisaComponent implements OnInit {
   constructor(private pessoaService: PessoaService,
               private errorHandler: ErrorHandlerService,
               private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private confirmationService: ConfirmationService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Pesquisa de pessoas');
   }
 
   pesquisar(pagina = 0) {

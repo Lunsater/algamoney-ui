@@ -10,6 +10,7 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { ButtonModule } from 'primeng/components/button/button';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { SharedModule } from '../shared/shared.module';
+import { PessoasRoutingModule } from './pessoas-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SharedModule } from '../shared/shared.module';
     ButtonModule,
     InputMaskModule,
     TooltipModule,
-    SharedModule
+    SharedModule,
+    PessoasRoutingModule
   ],
   exports: []
 })
