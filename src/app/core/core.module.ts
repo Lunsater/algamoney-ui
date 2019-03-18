@@ -8,10 +8,14 @@ import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { MessageService, ConfirmationService } from 'primeng/components/common/api';
 import { RouterModule } from '@angular/router';
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from '../seguranca/auth.service';
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    PaginaNaoEncontradaComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +34,9 @@ import { RouterModule } from '@angular/router';
     MessageService,
     ConfirmationService,
     { provide: LOCALE_ID, useValue: 'pt-BR'},
-    ErrorHandlerService
+    ErrorHandlerService,
+    Title,
+    AuthService
   ]
 })
 export class CoreModule { }

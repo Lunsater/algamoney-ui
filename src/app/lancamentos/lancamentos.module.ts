@@ -13,8 +13,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { SharedModule } from '../shared/shared.module';
 import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
-import { MessageService } from 'primeng/components/common/api';
-import { RouterModule } from '@angular/router';
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 
 
 @NgModule({
@@ -35,11 +34,8 @@ import { RouterModule } from '@angular/router';
     TooltipModule,
     InputTextareaModule,
     SharedModule,
-    RouterModule
+    LancamentosRoutingModule
   ],
-  exports: [
-    LancamentoCadastroComponent,
-    LancamentosPesquisaComponent
-  ]
+  exports: []
 })
 export class LancamentosModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/components/common/api';
 import { LancamentoService, LancamentoFiltro } from '../lancamento.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -15,10 +16,15 @@ export class LancamentosPesquisaComponent implements OnInit {
   lancamentos = [];
   @ViewChild('tabela') grid;
 
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de lançamentos');
+  }
+
   constructor(private lancamentoService: LancamentoService,
               private errorHandler: ErrorHandlerService,
               private messageService: MessageService,
-              private confirmationService: ConfirmationService) { }
+              private confirmationService: ConfirmationService,
+              private title: Title) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -57,7 +63,5 @@ export class LancamentosPesquisaComponent implements OnInit {
       },
       (erro) => {this.errorHandler.handle(erro); });
   }
-
-  ngOnInit() { }
 
 }

@@ -10,17 +10,7 @@ import localeBr from '@angular/common/locales/pt';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { CoreModule } from './core/core.module';
-import { Routes, RouterModule } from '@angular/router';
-import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
-import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pesquisa.component';
-
-const routes: Routes = [
-  { path: 'lancamentos', component: LancamentosPesquisaComponent },
-  { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
-  { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
-  { path: 'pessoas', component: PessoasPesquisaComponent }
-];
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 registerLocaleData(localeBr);
 
@@ -35,8 +25,9 @@ registerLocaleData(localeBr);
     HttpClientModule,
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
     CoreModule,
-    RouterModule.forRoot(routes)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

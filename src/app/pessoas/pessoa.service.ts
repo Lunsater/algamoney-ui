@@ -60,4 +60,18 @@ export class PessoaService {
     return this.http.post(`${this.pessoasUrl}`, JSON.stringify(pessoa), { headers });
   }
 
+  atualizar(pessoa: Pessoa): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic ' + btoa('admin@algamoney.com:admin'));
+    headers = headers.append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.pessoasUrl}/${pessoa.codigo}`, JSON.stringify(pessoa), { headers });
+  }
+
+  buscarPorCodigo(codigo: number): Observable<any> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa('admin@algamoney.com:admin') });
+
+    return this.http.get(`${this.pessoasUrl}/${codigo}`, { headers });
+  }
+
 }

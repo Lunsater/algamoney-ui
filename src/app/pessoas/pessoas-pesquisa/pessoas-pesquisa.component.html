@@ -46,7 +46,8 @@
                       </a>
                   </td>
                   <td>
-                      <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top" class="btn-acoes"></a>
+                      <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"
+                        class="btn-acoes" [routerLink]="['/pessoas', pes.codigo]"></a>
                       <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
                         class="btn-acoes" (click)="confirmarExclusao(pes)"></button>
                   </td>
@@ -58,7 +59,7 @@
   </div>
 
   <div class="ui-g-12">
-    <a pButton label="Nova Pessoa"></a>
+    <a pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
   </div>
 
 </div>
