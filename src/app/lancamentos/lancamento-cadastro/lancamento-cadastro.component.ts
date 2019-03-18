@@ -57,7 +57,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.lancamentoService.atualizar(this.lancamento)
       .subscribe((dados: any[]) => {
         console.log(dados);
-        //this.lancamento = dados as unknown as Lancamento;
+        // this.lancamento = dados as unknown as Lancamento;
 
         this.messageService.add({severity: 'success', summary: 'Salvar',
           detail: 'Lançamento alterado com sucesso'});
@@ -91,7 +91,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarCategorias() {
     return this.categoriaService.listarTodas()
       .subscribe((categoria: any[]) => {
-        //console.log(typeof categoria, categoria);
+        // console.log(typeof categoria, categoria);
         this.categorias = categoria.map(c => ({ label: c.nome, value: c.codigo}));
       },
       (erro) => {this.errorHandler.handle(erro); });
@@ -100,7 +100,7 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarPessoas() {
     return this.pessoaService.listarTodos()
       .subscribe((pessoa: any[]) => {
-        //console.log(typeof pessoa, pessoa);
+        // console.log(typeof pessoa, pessoa);
         this.pessoas = pessoa['content'].map(p => ({ label: p.nome, value: p.codigo}));
       },
       (erro) => {this.errorHandler.handle(erro); });
