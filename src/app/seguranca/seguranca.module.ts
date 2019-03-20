@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
-import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     SegurancaRoutingModule,
     InputTextModule,
     ButtonModule
-  ]
+  ],
+  providers: []
 })
 export class SegurancaModule { }
