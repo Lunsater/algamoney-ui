@@ -11,13 +11,8 @@ import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { CoreModule } from './core/core.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
-import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 
 registerLocaleData(localeBr);
-
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
-}
 
 @NgModule({
   declarations: [
@@ -32,16 +27,9 @@ export function tokenGetter() {
     PessoasModule,
     SegurancaModule,
     CoreModule,
-    AppRoutingModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        whitelistedDomains: ['localhost:8080']
-      }
-    })
-
+    AppRoutingModule
   ],
-  providers: [ JwtHelperService ],
+  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
