@@ -5,7 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
+import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
+import { JwtInterceptor } from '@auth0/angular-jwt';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [LoginFormComponent],
@@ -14,8 +20,22 @@ import { ButtonModule } from 'primeng/components/button/button';
     FormsModule,
     SegurancaRoutingModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:8080'],
+        blacklistedRoutes: ['localhost:8080/login']
+      }
+    })
   ],
-  providers: []
+  providers: [
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ]
 })
 export class SegurancaModule { }

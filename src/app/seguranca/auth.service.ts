@@ -23,7 +23,7 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oauthTokenUrl, body, { headers });
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true });
   }
 
   armazenarToken(token: string) {
@@ -38,4 +38,26 @@ export class AuthService {
       this.armazenarToken(token);
     }
   }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+  }
+
+  obterNovoAcessToken() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEBy');
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    const body = `grant_type=refresh_password`;
+
+    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
+      .subscribe((response: any) => {
+        this.armazenarToken(response['access_token']);
+        console.log('Access token criado');
+      },
+      erro => {
+        console.log('Erro ao renovar token.', erro);
+      });
+  }
+
 }
