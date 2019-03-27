@@ -48,10 +48,11 @@ export class AuthService {
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEBy');
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-    const body = `grant_type=refresh_password`;
+    let body = new URLSearchParams();
+    body.set('grant_type', 'refresh_token');
 
-    return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
-      .subscribe((response: any) => {
+    return this.http.post(this.oauthTokenUrl, body.toString(), { headers, withCredentials: true })
+      .subscribe((response: any[]) => {
         this.armazenarToken(response['access_token']);
         console.log('Access token criado');
       },
