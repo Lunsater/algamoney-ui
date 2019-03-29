@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { JwtInterceptor } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorInterceptor } from './error.interceptor';
+import { AuthGuard } from './auth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -31,11 +33,9 @@ export function tokenGetter() {
   ],
   providers: [
     JwtHelperService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true
-    }
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]
 })
 export class SegurancaModule { }
