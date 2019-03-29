@@ -25,7 +25,7 @@ export function tokenGetter() {
       config: {
         tokenGetter,
         whitelistedDomains: ['localhost:8080'],
-        blacklistedRoutes: ['localhost:8080/login']
+        blacklistedRoutes: ['http://localhost:8080/oauth/token']
       }
     })
   ],
