@@ -3,17 +3,29 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService) { }
+    constructor(
+      private authService: AuthService,
+      private router: Router ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
-                if (this.authService.isAccessTokenInvalido) {
+                if (this.authService.isAccessTokenInvalido()) {
                   this.authService.obterNovoAcessToken();
+                  // Se o novo access_token gerado for inválido,
+                  // significa que o refresh_token expirou,
+                  // nesse caso ocorre o redirecionamento para página de login
+                  /*
+                  const token2 = localStorage.getItem('token');
+                  if (this.authService.isAccessTokenInvalido) {
+                    this.router.navigate(['/login']);
+                  }
+                  */
                   /*
                   const token = localStorage.getItem('token');
 

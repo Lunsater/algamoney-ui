@@ -19,7 +19,6 @@ import { LancamentosRoutingModule } from './lancamentos-routing.module';
 @NgModule({
   declarations: [
     LancamentoCadastroComponent,
-    LancamentosGridComponent,
     LancamentosPesquisaComponent
   ],
   imports: [

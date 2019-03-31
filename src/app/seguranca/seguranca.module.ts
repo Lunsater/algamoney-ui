@@ -10,6 +10,7 @@ import { JwtInterceptor } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './error.interceptor';
 import { AuthGuard } from './auth.guard';
+import { LogoutService } from './logout.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -34,6 +35,7 @@ export function tokenGetter() {
   providers: [
     JwtHelperService,
     AuthGuard,
+    LogoutService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ]

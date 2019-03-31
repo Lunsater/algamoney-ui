@@ -65,14 +65,49 @@ export class AuthService {
     let body = new URLSearchParams();
     body.set('grant_type', 'refresh_token');
 
-    return this.http.post(this.oauthTokenUrl, body.toString(), { headers, withCredentials: true })
-      .subscribe((response: any[]) => {
-        this.armazenarToken(response['access_token']);
-        console.log('Access token criado');
-      },
-      erro => {
-        console.log('Erro ao renovar token.', erro);
+    return this.http.post(this.oauthTokenUrl, body.toString(),
+      { headers, withCredentials: true })
+    .toPromise()
+    .then(response => {
+      this.armazenarToken(response['access_token']);
+
+      console.log('Novo access token criado!');
+
+      return Promise.resolve(null);
+    })
+    .catch(response => {
+      console.error('Erro ao renovar token.', response);
+      return Promise.resolve(null);
+    });
+}
+
+  obterNovoAccessToken(): Promise<void> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    const body = 'grant_type=refresh_token';
+
+    return this.http.post(this.oauthTokenUrl, body,
+        { headers, withCredentials: true })
+      .toPromise()
+      .then(response => {
+        this.armazenarToken(response.json().access_token);
+
+        console.log('Novo access token criado!');
+
+        return Promise.resolve(null);
+      })
+      .catch(response => {
+        console.error('Erro ao renovar token.', response);
+        return Promise.resolve(null);
       });
+  }
+
+
+  limparAccessToken() {
+    localStorage.removeItem('token');
+    this.jwtPayload = null;
   }
 
 }
