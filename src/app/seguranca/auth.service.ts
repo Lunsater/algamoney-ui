@@ -57,7 +57,7 @@ export class AuthService {
     return !token || this.jwtHelper.isTokenExpired(token);
   }
 
-  obterNovoAcessToken() {
+  obterNovoAcessToken(): Promise<void> {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEBy');
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
