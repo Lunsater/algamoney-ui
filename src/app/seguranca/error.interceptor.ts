@@ -17,9 +17,22 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
               console.log(`Token velho: ${localStorage.getItem('token')}`);
               if (this.authService.isAccessTokenInvalido()) {
-                this.authService.obterNovoAcessToken();
+                this.authService.obterNovoAcessToken()
+                  .subscribe((response: any[]) => {
+                    const token = response['access_token'];
+                    this.authService.armazenarToken(token);
+                    console.log(`Token novo: ${localStorage.getItem('token')}`);
+                    if (this.authService.isAccessTokenInvalido()) {
+                      this.router.navigate(['/login']);
+                    }
+                    request = request.clone({
+                      setHeaders: {
+                          Authorization: `Bearer ${token}`
+                      }
+                    });
+                    return next.handle(request);
+                  });
 
-                console.log(`Token novo: ${localStorage.getItem('token')}`);
                   // Se o novo access_token gerado for inválido,
                   // significa que o refresh_token expirou,
                   // nesse caso ocorre o redirecionamento para página de login

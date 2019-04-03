@@ -57,6 +57,19 @@ export class AuthService {
     return !token || this.jwtHelper.isTokenExpired(token);
   }
 
+  obterNovoAcessToken(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEBy');
+    headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+    let body = new URLSearchParams();
+    body.set('grant_type', 'refresh_token');
+
+    return this.http.post(this.oauthTokenUrl, body.toString(),
+      { headers, withCredentials: true });
+  }
+
+/*
   obterNovoAcessToken(): Promise<void> {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEBy');
@@ -80,6 +93,7 @@ export class AuthService {
       return Promise.resolve(null);
     });
 }
+*/
 
   limparAccessToken() {
     localStorage.removeItem('token');
