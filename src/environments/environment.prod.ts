@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://algamoney-api.hirokuapp.com'
+  apiUrl: 'https://algamoney-back.hirokuapp.com'
 };
