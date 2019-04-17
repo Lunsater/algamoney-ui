@@ -15,22 +15,14 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
-              console.log(`Token velho: ${localStorage.getItem('token')}`);
               if (this.authService.isAccessTokenInvalido()) {
                 this.authService.obterNovoAcessToken()
                   .subscribe((response: any[]) => {
                     const token = response['access_token'];
                     this.authService.armazenarToken(token);
-                    console.log(`Token novo: ${localStorage.getItem('token')}`);
                     if (this.authService.isAccessTokenInvalido()) {
                       this.router.navigate(['/login']);
                     }
-                    request = request.clone({
-                      setHeaders: {
-                          Authorization: `Bearer ${token}`
-                      }
-                    });
-                    return next.handle(request);
                   });
 
                   // Se o novo access_token gerado for inválido,
