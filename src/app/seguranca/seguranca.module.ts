@@ -28,7 +28,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter,
-        whitelistedDomains: ['localhost:8080'],
+        whitelistedDomains: ['algamoney-front.herokuapp.com'],
         blacklistedRoutes: [`${environment.apiUrl}/oauth/token`]
       }
     })
